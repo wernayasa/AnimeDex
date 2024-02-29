@@ -73,9 +73,9 @@
 
 */
 /*!************************************************
-* Name		: Tema Dasar
-* Version	: 10
-* Build		: 02/09/2023
+* Name		: AnimeDex
+* Version	: 1.1
+* Build		: 29/02/2024
 * Website	: emissionhex.blogspot.com
 **************************************************/
 :root {
@@ -211,7 +211,7 @@ h2{font-family:"Montserrat",sans-serif;color:#ed3832;font-weight:500;width:100%;
 /* Anime Info */
 #background{box-sizing:border-box;position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;height:100%;display:block;}
 #overview1{max-height:150px;overflow:auto;display:block;}
-#overview3{max-height:150px;overflow:auto;display:none;}
+#overview3{max-height:150px;overflow:auto;display:none;scrollbar-width:thin;}
 #overview2{margin-bottom:4px;display:block;}
 #cover{box-sizing:border-box;position:absolute;top:-20px;left:-20px;right:-20px;bottom:-20px;background-size:cover;background-position:center center;background-repeat:no-repeat;filter:blur(20px);opacity:0.35;background-attachment:scroll;}
 .post-view header .poster{box-sizing:border-box;text-align:center;display:inline;padding:20px;margin:0;overflow:visible;margin-top:20px;}
@@ -320,6 +320,26 @@ h1{font-family:"Montserrat",sans-serif;font-size:40px;color:white;font-weight:70
     ]]></b:template-skin>
   <b:defaultmarkups>
     <b:defaultmarkup type='Common'>
+      <b:includable id='episodeBadges'>
+        <b:with value='[&quot;Episode&quot;, &quot;Eps&quot;, &quot;Ep&quot;]' var='checkEpisode'>
+  <b:if cond='data:post.labels'>
+    <b:loop values='data:post.labels' var='item'>
+      <b:with value='&quot;String: &quot; + data:item.name' var='string'>
+        <b:loop values='data:checkEpisode' var='first'>
+          <b:if cond='data:string contains data:first + &quot; &quot;'>
+            <span class='cbox'><data:item.name/></span>
+          </b:if>
+        </b:loop>
+      </b:with>
+    </b:loop>
+  </b:if>
+</b:with>
+        <b:loop index='i' values='data:post.labels' var='label'>
+        <b:if cond='data:label.name in data:Type'>
+          <span class='cbox' expr:data-bg='data:label.name'><data:label.name/></span>
+        </b:if>
+      </b:loop> 
+      </b:includable>
       <b:includable id='Episode'>
         <span class='dubb'>
           <b:loop index='i' values='data:post.labels' var='label'>
@@ -629,6 +649,8 @@ h1{font-family:"Montserrat",sans-serif;font-size:40px;color:white;font-weight:70
 </div>
   </b:if>
 <b:with value='[&quot;SUB&quot;,&quot;DUB&quot;]' var='Language'>
+<b:with value='[&quot;TV&quot;,&quot;Movie&quot;,&quot;OVA&quot;,&quot;ONA&quot;,&quot;Special&quot;,&quot;Donghua&quot;]' var='Type'>
+<b:with value='[&quot;WEB-DL&quot;,&quot;BD&quot;,&quot;CAM&quot;,&quot;HD&quot;]' var='Quality'>
 <b:with value='[&quot;Yaoi&quot;,&quot;Yuri&quot;]' var='Genre2'>
 <b:with value='[&quot;Action&quot;,&quot;Adventure&quot;,&quot;Comedy&quot;,&quot;Demons&quot;,&quot;Drama&quot;,&quot;Ecchi&quot;,&quot;Fantasy&quot;,&quot;Game&quot;,&quot;Gore&quot;,&quot;Harem&quot;,&quot;Historical&quot;,&quot;Horror&quot;,&quot;Isekai&quot;,&quot;Josei&quot;,&quot;Magic&quot;,&quot;Martial Arts&quot;,&quot;Mecha&quot;,&quot;Military&quot;,&quot;Music&quot;,&quot;Mystery&quot;,&quot;Psychological&quot;,&quot;Romance&quot;,&quot;Romcom&quot;,&quot;School&quot;,&quot;School Life&quot;,&quot;Sci-Fi&quot;,&quot;Seinen&quot;,&quot;Shoujo&quot;,&quot;Shoujo Ai&quot;,&quot;Shounen&quot;,&quot;Shounen Ai&quot;,&quot;Slice of Life&quot;,&quot;Sports&quot;,&quot;Super Power&quot;,&quot;Supernatural&quot;,&quot;Survival&quot;,&quot;Thriller&quot;,&quot;Tragedy&quot;,&quot;Vampire&quot;]' var='Genre'>
 <b:section id='main' showaddelement='true'>
@@ -1193,15 +1215,35 @@ h1{font-family:"Montserrat",sans-serif;font-size:40px;color:white;font-weight:70
       <div class='details col-6'>
          <h1 class='anime-title'><data:post.title/></h1>
          <div class='mid' style='margin: 20px 0px'>
-            <span class='cbox'>HD</span>
-            <span class='cbox'>EP 20</span>
-            <span class='dot'/>
-            <span class='year'>Fall 2023 Anime</span>
+           <b:loop index='i' values='data:post.labels' var='label'>
+             <b:if cond='data:label.name in data:Quality'>
+               <span class='cbox'><data:label.name/></span>
+             </b:if>
+           </b:loop> 
+           <b:include name='episodeBadges'/>
+           <span class='dot'/>
+           <b:with value='[&quot;Winter&quot;,&quot;Summer&quot;,&quot;Spring&quot;,&quot;Fall&quot;]' var='checkMusim'>
+            <b:if cond='data:post.labels'>
+              <b:loop values='data:post.labels' var='item'>
+                <b:with value='&quot;String: &quot; + data:item.name' var='string'>
+                  <b:loop values='data:checkMusim' var='first'>
+                    <b:if cond='data:string contains data:first + &quot; &quot;'>
+                      <span class='year'><data:item.name/></span>
+                    </b:if>
+                  </b:loop>
+                </b:with>
+              </b:loop>
+            </b:if>
+          </b:with>
          </div>
          <div class='mid' id='watchh'>
-            <a class='watch-btn' href='./episode.html?anime=kusuriya-no-hitorigoto&amp;episode=1' id='watch-btn'>
-            <i aria-hidden='true' class='fa fa-play'/> Watch Now
-            </a>
+           <b:loop values='data:post.enclosures' var='enclosure'>
+             <!--application/zip == Download-->
+             <b:if cond='data:enclosure.mimeType == &quot;Watch Now&quot;'>
+               <a class='watch-btn' expr:href='data:enclosure.url' expr:title='&quot;Watch &quot; + data:enclosure.url' id='watch-btn' rel='enclosure'>
+                 <i aria-hidden='true' class='fa fa-play'/> Watch Now</a>
+             </b:if>
+        </b:loop>
          </div>
          <div class='synopsis' id='overview3'/>
       </div>
@@ -1715,6 +1757,8 @@ h1{font-family:"Montserrat",sans-serif;font-size:40px;color:white;font-weight:70
 </b:with>
 </b:with>
 </b:with>
+</b:with>
+</b:with>
     <footer>
         <div>
             <a href='https://github.com/TechShreyash' target='_blank'>MADE WITH <i class='fa fa-heart pulse'/>BY TECH
@@ -1732,10 +1776,15 @@ let _EpisodeListBS=new BloggerSitemap({
   labelStatus:["Completed","Ongoing"]
 });"object"==typeof _EpisodeListBS&&"undefined"!=typeof labelListBS&&_EpisodeListBS.run(`/feeds/posts/default/-/${labelListBS}`,function(e){let i=_EpisodeListBS._config,t=document.getElementById("singlepisode"),l=e=>e.split("Episode ")[1]||e.split("Chapter ")[1]||e.replace(/\D/g,""),s="",a='<div class="episodelist"><ul class="grid gap-4">',n=(window||document).location.pathname;if(!t)return!1;e.sort((e,i)=>e.title.localeCompare(i.title,void 0,{numeric:!0})).reverse().forEach((e,t,r)=>{if(e.label.some(e=>e==i.labelMain)){let t=e.label.find(e=>i.labelStatus.includes(e))||"N/A",l=r.filter(e=>!e.label.some(e=>e==i.labelMain)).map(e=>e.link).reverse(),a=l.indexOf(l.find(e=>e.includes(n)));s=`<div class="headlist"><div class="thumb"><a href="${e.link}"><img src="${e.image}" class="ts-post-image" loading="lazy" width="500" height="354"></a></div><div class="det"><h3><a href="${e.link}">${e.title}</a></h3><span><i>${t}</i> - ${a+1} / ${l.length}</span></div></div>`}else{let t=`${i.epname} ${l(e.title)}`;a+=`<li ${e.link.includes(n)?'class="selected text-accent"':""}><a href="${e.link}" itemprop="url" title="${e.title}"><div class="thumbnel aspect-video rounded"><img src="${e.image}" class="ts-post-image" loading="lazy" title="${e.title}" width="1366" height="768">${e.link.includes(n)?'<div class="nowplay"></div>':""}</div>`,a+=`<div class="playinfo"><time>${e.date}</time><h4>${t}</h4></div></a></li>`}}),t.innerHTML=`${s+a}</ul></div>`});
 /*]]>*/</script>
-  <script defer='defer'>/*<![CDATA[*/ 
-  document.getElementById('extra-target').appendChild(
-    document.getElementById('extra-info')
-  ); 
+  <script>/*<![CDATA[*/ 
+  let Data_extra = document.querySelector("#extra-info");
+  let Target_extra = document.querySelector("#extra-target");
+  Data_extra && (Data_extra ? Target_extra.appendChild(Data_extra) : ""); 
+/*]]>*/</script>
+<script>/*<![CDATA[*/ 
+  let Data_Syn = document.querySelector("#synopsis");
+  let Target_Syn = document.querySelector("#overview3");
+  Data_Syn && (Data_Syn ? Target_Syn.appendChild(Data_Syn) : ""); 
 /*]]>*/</script>
   </b:if>
       <script async='async' crossorigin='anonymous' src='https://kit.fontawesome.com/45cb819601.js'/>
