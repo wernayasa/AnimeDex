@@ -74,7 +74,7 @@
 */
 /*!************************************************
 * Name		: AnimeDex
-* Version	: 1.1
+* Version	: 1.2
 * Build		: 29/02/2024
 * Website	: emissionhex.blogspot.com
 **************************************************/
@@ -1378,6 +1378,7 @@ h1{font-family:"Montserrat",sans-serif;font-size:40px;color:white;font-weight:70
         <div class='post-body entry-content float-container'>
           <data:post.body/>
         </div>
+        <div id='singlepisode'/>
       </main>
       <script crossorigin='anonymous' defer='defer' fetchpriority='low'>/*<![CDATA[*/ !function(e,t){if("object"!=typeof streamingFiles&&0!=streamingFiles.length&&"string"!=typeof stremingId)return;let a=e.getElementById("list-episode"),r=e.getElementById("lightBulb");function l(e,t){return`<iframe loading="lazy" class="focus:outline-none" src="${e}" title="${t}" allow="accelerometer; autoplay;gyroscope; picture-in-picture" allowfullscreen="" loading="eager" frameborder="0"></iframe>`}if(a){let t="";streamingFiles.forEach(((e,a)=>{t+=function(e,t,a){return`<a data-index="${a}" data-episode-list-index="${t}" class="ep-btn" href="#${t}" title="${e}"> ${t} </a>`}(e.title,e.episode,a)})),a.innerHTML=t;let r=a.querySelectorAll("a"),i=e.getElementById("pembed"),n=e.getElementById("sub-server"),s=e.getElementById("dub-server"),d=e.getElementById("epname"),o=e.querySelectorAll(".npep"),c=e.querySelector('input[name="episode_number"]');r.forEach(((t,a)=>{t.addEventListener("click",(t=>{let c=t.currentTarget,p=streamingFiles.find((e=>e.episode==c.dataset.episodeListIndex));i.innerHTML=l(p.files[0][1],p.title),localStorage.setItem(`${streamingId} last-watched`,a),(s||n).parentElement.querySelectorAll("span").forEach((e=>{"dub"!=e.dataset.type&&"sub"!=e.dataset.type&&e.remove()})),o.forEach((e=>{"prev"==e.dataset.type?a-1!=-1?(e.href="#"+(a-1),e.dataset.index=a-1,e.disabled=!1):(e.removeAttribute("href"),e.disabled=!0):"next"==e.dataset.type&&(a+1!=r.length?(e.href=`#${a+1}`,e.dataset.index=a+1,e.disabled=!1):(e.removeAttribute("href"),e.disabled=!0))})),p.files.forEach((t=>{let a=function(t,a){let r=e.createElement("span");return r.className="sobtn",r.dataset.url=a,r.innerHTML=t,r}(t[0],t[1]);a.addEventListener("click",(()=>{i.innerHTML=l(t[1],t[0])})),"dub"==t[2]?s.appendChild(a):n.appendChild(a)})),d.innerHTML="Episode "+c.dataset.episodeListIndex,r.forEach((e=>e.classList.remove("active"))),t.currentTarget.classList.add("active")}))})),o.forEach((e=>{e.addEventListener("click",(e=>{e.currentTarget.href&&r[e.currentTarget.dataset.index].click()}))})),c.addEventListener("keyup",(e=>{r.forEach((t=>{t.dataset.episodeListIndex.includes(e.currentTarget.value)?t.style.display="":t.style.display="none"}))}));let p=localStorage.getItem(`${streamingId} last-watched`);p?r[p].click():r[0].click()}r&&[r,e.getElementById("shadow")].forEach((t=>{t.addEventListener("click",(()=>{e.getElementById("shadow").classList.toggle("active")}))}))}(document,window); /*]]>*/</script>
 </b:includable>
